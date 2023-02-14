@@ -22,8 +22,9 @@ pipeline {
     stage('Docker Image') {
       steps {
         echo 'Docker Image'
-        dir("${env.WORKSPACE}")
+        dir("${env.WORKSPACE}") {
           sh'docker build -t aws12-spring-petclinic:100:0'
+        }      
       }
     }
     stage('Image Push') {
