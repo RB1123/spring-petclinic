@@ -24,9 +24,9 @@ pipeline {
         echo 'Image Push'
       }
     }
-    stage('Codedeploy') {
+    stage('Codedeploy Workload') {
       steps {
-        echo 'codedeploy'
+        echo 'codedeploy Workload'
       }
     }
   }
