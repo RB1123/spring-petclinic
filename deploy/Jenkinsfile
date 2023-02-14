@@ -1,9 +1,10 @@
 pipeline {
   agent any
-  tools 
-  {maven "M3"
-   jdk"JDK11"
-   
+  tools {
+    maven "M3"
+    jdk"JDK11"
+  }
+  
   stages {
     stage('Git fatch') {
       steps {
