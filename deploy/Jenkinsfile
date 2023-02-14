@@ -1,6 +1,9 @@
 pipeline {
   agent any
-  
+  tools 
+  {maven "M3"
+   jdk"JDK11"
+   
   stages {
     stage('Git fatch') {
       steps {
@@ -12,6 +15,7 @@ pipeline {
     stage('maven Build') {
       steps {
         echo 'maven Build'
+        sh 'mvn -Dmaven.test.failure.ignore=true clean package'
       }
     }
     stage('Docker Image') {
