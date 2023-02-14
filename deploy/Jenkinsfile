@@ -5,30 +5,31 @@ pipeline {
     jdk"JDK11"
   }
   environment {
-        AWS_CREDENTIAL_NAME = "awsEcrCredentials"
-        AWS_ACCOUNT_ID = "257307634175"
-        REGION = "ap-northeast-2"
-        DOCKER_IMAGE_NAME="aws12-spring-petclinic"
-        DOCKER_TAG="1.0"
-        ECR_REPOSITORY = "${AWS_ACCOUNT_ID}.dkr.ecr.ap-northeast-2.amazonaws.com"
-        ECR_DOCKER_IMAGE = "${ECR_REPOSITORY}/${DOCKER_IMAGE_NAME}"
-        ECR_DOCKER_TAG = "${DOCKER_TAG}"
+    AWS_CREDENTIAL_NAME = "awsEcrCredential"
+    AWS_ACCOUNT_ID = "257307634175"
+    REGION = "ap-northeast-2"
+    DOCKER_IMAGE_NAME="aws12-spring-petclinic"
+    DOCKER_TAG="1.0"
+    ECR_REPOSITORY = "${AWS_ACCOUNT_ID}.dkr.ecr.ap-northeast-2.amazonaws.com"
+    ECR_DOCKER_IMAGE = "${ECR_REPOSITORY}/${DOCKER_IMAGE_NAME}"
+    ECR_DOCKER_TAG = "${DOCKER_TAG}"
   }
   
   stages {
-    stage('Git fatch') {
+    stage('Git fetch') {
       steps {
         echo 'Git fatch'
-        git url: 'https://github.com/RB1123/spring-petclinic.git/',
+        git url: 'https://github.com/s4616/spring-petclinic.git/',
           branch: 'main', credentialsId: 'gitCredential'
       }
     }
-    stage('maven Build') {
+    stage('Maven Build') {
       steps {
-        echo 'maven Build'
+        echo 'Maven Build'
         sh 'mvn -Dmaven.test.failure.ignore=true clean package'
       }
     }
+    
     stage('Docker Image') {
       steps {
         echo 'Docker Image'
@@ -50,9 +51,9 @@ pipeline {
         }
       }
     }
-    stage('Codedeploy Workload') {
+    stage('Codedeploy Workload ') {
       steps {
-        echo 'codedeploy Workload'
+        echo 'Codedeploy Workload'
       }
     }
   }
